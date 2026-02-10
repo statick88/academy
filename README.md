@@ -1,43 +1,124 @@
-# Astro Starter Kit: Minimal
+# Statick Academy
 
-```sh
-npm create astro@latest -- --template minimal
+[![Built with Astro](https://astro.badg.es/v2/built-with-astro/small.svg)](https://astro.build)
+
+> **Plataforma de Educación Tecnológica Premium**
+> Contenido gratuito y de alta calidad para la comunidad hispanohablante
+
+## 🎯 Misión
+
+Statick Academy es una plataforma educativa dedicada a proporcionar formación tecnológica de excelencia, completamente gratuita y accesible para la comunidad de habla hispana. Nuestra visión es democratizar el acceso al conocimiento técnico avanzado.
+
+## 🚀 Características
+
+- **Cursos Estructurados**: Aprendizaje progresivo desde fundamentos hasta casos avanzados
+- **Contenido Práctico**: Laboratorios interactivos y proyectos reales
+- **Comunidad Activa**: Espacios para discusión, mentoría y networking
+- **Certificaciones**: Sistema verificable de logros y competencias
+- **Modelo Freemium**: Contenido premium gratuito con soporte opcional
+
+## 🛠️ Stack Tecnológico
+
+- **Framework**: [Astro 5](https://astro.build/) - Rendimiento y DX excepcionales
+- **UI**: [React 19](https://react.dev/) - Componentes interactivos
+- **Styling**: [TailwindCSS 4](https://tailwindcss.com/) - Diseño moderno y responsive
+- **Content**: Markdown con plugins avanzados (TOC, GFM, autolinks)
+- **TypeScript**: Type safety completo
+
+## 📚 Cursos Disponibles
+
+### 🚀 OpenClaw Course (Próximamente)
+Dominio completo del ecosistema OpenClaw y asistentes AI:
+
+- **11 Módulos** - De fundamentos a integración avanzada
+- **80 Lecciones** - Aprendizaje estructurado y progresivo
+- **20 Laboratorios** - Experiencia práctica hands-on
+- **Certificación** - Credencial verificable al completar
+
+### 📋 Roadmap de Cursos
+- OpenClaw Integration
+- Cloud Architecture Patterns
+- DevOps Fundamentals
+- AI/ML Engineering
+- Cybersecurity Basics
+- Mobile Development
+- Web Performance Optimization
+
+## 🏗️ Arquitectura
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
+academy/
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/     # Componentes reutilizables
+│   ├── layouts/        # Layouts de página
+│   ├── pages/          # Rutas y páginas
+│   ├── content/        # Contenido de cursos (Markdown)
+│   ├── lib/           # Utilidades y helpers
+│   └── types/         # Definiciones TypeScript
+├── docs/              # Documentación del proyecto
+└── scripts/           # Scripts de automatización
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🚀 Inicio Rápido
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Prerrequisitos
+- Node.js 18+
+- npm o pnpm
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Instalación
+```bash
+# Clonar repositorio
+git clone https://github.com/statick88/academy.git
+cd academy
 
-## 🧞 Commands
+# Instalar dependencias
+npm install
 
-All commands are run from the root of the project, from a terminal:
+# Iniciar servidor de desarrollo
+npm run dev
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Scripts Disponibles
+```bash
+npm run dev      # Servidor de desarrollo
+npm run build    # Build de producción
+npm run preview  # Preview del build
+```
 
-## 👀 Want to learn more?
+## 🤝 Contribución
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+¡Las contribuciones son bienvenidas! Este proyecto se desarrolla de manera open source para beneficiar a la comunidad.
+
+### Áreas de Contribución
+- **Contenido**: Crear o mejorar material educativo
+- **Código**: Mejoras técnicas y nuevas funcionalidades
+- **Traducción**: Expandir el alcance a más idiomas
+- **Testing**: Asegurar calidad y estabilidad
+- **Documentación**: Mejorar guías y referencias
+
+### Proceso
+1. Fork el repositorio
+2. Crear rama feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit cambios (`git commit -m 'Agrega nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abrir Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 📞 Contacto
+
+- **Website**: [statick.academy](https://statick.academy) (próximamente)
+- **GitHub**: [statick88/academy](https://github.com/statick88/academy)
+- **Email**: contact@statick.academy
+
+## 🙏 Agradecimientos
+
+- Comunidad de desarrolladores hispanohablantes
+- Contribuidores open source
+- Plataformas educativas que inspiran nuestro modelo
+
+---
+
+**Statick Academy** - Aprende tecnología con pasión y calidad.

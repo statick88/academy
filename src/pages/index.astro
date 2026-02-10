@@ -1,17 +1,47 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Statick Academy - Educación Tecnológica Premium">
+	<div class="text-center">
+		<h1 class="text-4xl font-bold text-slate-900 mb-4">
+			Bienvenido a Statick Academy
+		</h1>
+		<p class="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+			La plataforma definitiva para aprender tecnología con contenido premium gratuito.
+			Desarrollada por profesionales para la comunidad hispanohablante.
+		</p>
+
+		<div class="grid md:grid-cols-3 gap-6 mt-12">
+			<div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+				<h3 class="text-lg font-semibold text-slate-900 mb-3">🎓 Cursos Estructurados</h3>
+				<p class="text-slate-600">Aprende con cursos completos, desde fundamentos hasta casos avanzados reales.</p>
+			</div>
+			<div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+				<h3 class="text-lg font-semibold text-slate-900 mb-3">💻 Contenido Práctico</h3>
+				<p class="text-slate-600">Laboratorios interactivos y proyectos reales para consolidar el aprendizaje.</p>
+			</div>
+			<div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+				<h3 class="text-lg font-semibold text-slate-900 mb-3">🌍 Comunidad Activa</h3>
+				<p class="text-slate-600">Únete a una comunidad de desarrolladores apasionados por la tecnología.</p>
+			</div>
+		</div>
+
+		<div class="mt-12">
+			<h2 class="text-2xl font-bold text-slate-900 mb-6">Próximamente</h2>
+			<div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 rounded-lg">
+				<h3 class="text-xl font-semibold mb-4">🚀 OpenClaw Course</h3>
+				<p class="text-lg mb-4">
+					Dominio completo de OpenClaw: desde fundamentos hasta integración avanzada con asistentes AI.
+				</p>
+				<p class="text-sm opacity-90">
+					11 módulos • 80 lecciones • 20 laboratorios prácticos
+				</p>
+			</div>
+		</div>
+
+		<div class="mt-8 text-slate-500">
+			<p>🛠️ Plataforma en desarrollo - ¡Pronto más contenido!</p>
+		</div>
+	</div>
+</Layout>
