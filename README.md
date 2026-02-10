@@ -109,7 +109,7 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 📞 Contacto
 
-- **Website**: [statick88.github.io](https://statick88.github.io)
+- **Website**: [statick88.github.io/academy](https://statick88.github.io/academy)
 - **GitHub**: [statick88/academy](https://github.com/statick88/academy)
 - **Email**: contact@statick.academy
 
