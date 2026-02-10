@@ -1,0 +1,98 @@
+---
+// src/layouts/CourseLayout.astro
+import '../styles/global.css';
+import Navigation from '../components/Navigation.tsx';
+import Button from '../components/Button.tsx';
+
+export interface Props {
+	title: string;
+	description?: string;
+	courseTitle?: string;
+	showBackButton?: boolean;
+}
+
+const { title, description, courseTitle, showBackButton = false } = Astro.props;
+
+const navItems = [
+	{ label: 'Inicio', href: '/', active: false },
+	{ label: 'Cursos', href: '/courses', active: Astro.url.pathname.startsWith('/courses') },
+	{ label: 'Comunidad', href: '/community', active: false },
+	{ label: 'Dashboard', href: '/dashboard', active: false },
+];
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description || "Statick Academy - Plataforma de Educación Tecnológica Premium"} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="bg-academy-bg-secondary text-academy-text-primary min-h-screen font-body">
+		<header class="bg-academy-bg-primary shadow-sm border-b border-academy-border-light sticky top-0 z-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex justify-between items-center h-16">
+					<div class="flex items-center space-x-4">
+						{showBackButton && (
+							<a href="/courses" class="text-academy-text-secondary hover:text-primary-600 transition-colors">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+								</svg>
+							</a>
+						)}
+						<a href="/" class="flex items-center space-x-2">
+							<div class="w-8 h-8 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-lg flex items-center justify-center">
+								<span class="text-white font-bold text-sm">SA</span>
+							</div>
+							<h1 class="text-xl font-bold text-academy-text-primary">Statick Academy</h1>
+						</a>
+					</div>
+
+					<!-- Desktop Navigation -->
+					<Navigation items={navItems} className="hidden md:block" client:load />
+
+					<!-- Mobile Navigation -->
+					<div class="md:hidden">
+						<Navigation items={navItems} className="md:hidden" client:load />
+					</div>
+				</div>
+
+				<!-- Course Header (if courseTitle is provided) -->
+				{courseTitle && (
+					<div class="border-t border-academy-border-light py-4">
+						<div class="flex items-center justify-between">
+							<div>
+								<h2 class="text-lg font-semibold text-academy-text-primary">{courseTitle}</h2>
+								<p class="text-academy-text-secondary text-sm">Aprende a tu ritmo</p>
+							</div>
+							<div class="flex space-x-2">
+								<Button variant="outline" size="sm" client:load>
+									<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+									</svg>
+									Más opciones
+								</Button>
+							</div>
+						</div>
+					</div>
+				)}
+			</div>
+		</header>
+
+		<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<slot />
+		</main>
+
+		<footer class="bg-academy-bg-tertiary border-t border-academy-border-light mt-16">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+				<div class="text-center text-academy-text-secondary">
+					<p>&copy; 2026 Statick Academy. Todos los derechos reservados.</p>
+					<p class="mt-2 text-sm">Aprende tecnología con contenido premium gratuito</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

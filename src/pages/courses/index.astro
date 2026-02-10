@@ -1,0 +1,174 @@
+---
+// src/pages/courses/index.astro
+import CourseLayout from '../../layouts/CourseLayout.astro';
+import Card, { CardHeader, CardContent, CardFooter } from '../../components/Card.tsx';
+import Badge from '../../components/Badge.tsx';
+import Button from '../../components/Button.tsx';
+import { courses, getFeaturedCourses, getCoursesByStatus } from '../../lib/data/courses';
+
+const featuredCourses = getFeaturedCourses();
+const availableCourses = getCoursesByStatus('available');
+const comingSoonCourses = getCoursesByStatus('coming-soon');
+const inDevelopmentCourses = getCoursesByStatus('in-development');
+---
+
+<CourseLayout
+	title="Cursos - Statick Academy"
+	description="Explora nuestra colección de cursos de tecnología premium gratuitos"
+>
+	<div class="mb-8">
+		<div class="flex items-center justify-between mb-6">
+			<div>
+				<h1 class="text-3xl font-bold text-academy-text-primary mb-2">Nuestros Cursos</h1>
+				<p class="text-academy-text-secondary">Aprende tecnología con contenido premium gratuito</p>
+			</div>
+			<div class="flex items-center space-x-2">
+				<Button variant="outline" size="sm" client:load>
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+					</svg>
+					Filtrar
+				</Button>
+				<Button variant="outline" size="sm" client:load>
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+					</svg>
+					Ordenar
+				</Button>
+			</div>
+		</div>
+
+		<!-- Statistics -->
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+			<div class="bg-academy-bg-primary p-4 rounded-lg border border-academy-border-light">
+				<div class="text-2xl font-bold text-primary-600">{courses.length}</div>
+				<div class="text-academy-text-secondary text-sm">Cursos Totales</div>
+			</div>
+			<div class="bg-academy-bg-primary p-4 rounded-lg border border-academy-border-light">
+				<div class="text-2xl font-bold text-success">{availableCourses.length}</div>
+				<div class="text-academy-text-secondary text-sm">Disponibles</div>
+			</div>
+			<div class="bg-academy-bg-primary p-4 rounded-lg border border-academy-border-light">
+				<div class="text-2xl font-bold text-warning">{comingSoonCourses.length}</div>
+				<div class="text-academy-text-secondary text-sm">Próximamente</div>
+			</div>
+			<div class="bg-academy-bg-primary p-4 rounded-lg border border-academy-border-light">
+				<div class="text-2xl font-bold text-info">{inDevelopmentCourses.length}</div>
+				<div class="text-academy-text-secondary text-sm">En Desarrollo</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Featured Courses -->
+	{featuredCourses.length > 0 && (
+		<section class="mb-12">
+			<h2 class="text-2xl font-bold text-academy-text-primary mb-6 flex items-center">
+				<svg class="w-6 h-6 mr-2 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+					<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+				</svg>
+				Cursos Destacados
+			</h2>
+
+			<div class="grid md:grid-cols-1 gap-6 mb-8">
+				{featuredCourses.map(course => (
+					<Card variant="elevated" className="overflow-hidden" key={course.id}>
+						<div class="md:flex">
+							<div class="md:w-1/3 bg-gradient-to-br from-primary-500 to-secondary-600 p-6 flex items-center justify-center">
+								<div class="text-center text-white">
+									<div class="text-4xl font-bold mb-2">{course.modules}</div>
+									<div class="text-sm opacity-90">Módulos</div>
+								</div>
+							</div>
+							<div class="md:w-2/3 p-6">
+								<div class="flex items-start justify-between mb-4">
+									<div class="flex-1">
+										<div class="flex items-center space-x-2 mb-2">
+											<h3 class="text-xl font-bold text-academy-text-primary">{course.title}</h3>
+											{course.price === 'free' && <Badge variant="success" client:load>Gratuito</Badge>}
+											{course.price === 'premium' && <Badge variant="secondary" client:load>Premium</Badge>}
+										</div>
+										<p class="text-academy-text-secondary mb-3">{course.description}</p>
+										<div class="flex items-center space-x-4 text-sm text-academy-text-muted">
+											<span>📚 {course.lessons} lecciones</span>
+											<span>🧪 {course.labs} laboratorios</span>
+											<span>⏱️ {course.duration}</span>
+											<span class={`px-2 py-1 rounded-full text-xs ${
+												course.level === 'beginner' ? 'bg-green-100 text-green-800' :
+												course.level === 'intermediate' ? 'bg-yellow-100 text-yellow-800' :
+												'bg-red-100 text-red-800'
+											}`}>
+												{course.level === 'beginner' ? 'Principiante' :
+												 course.level === 'intermediate' ? 'Intermedio' : 'Avanzado'}
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="flex justify-between items-center">
+									<div class="flex space-x-2">
+										{course.tags.slice(0, 3).map(tag => (
+											<Badge variant="default" size="sm" key={tag} client:load>{tag}</Badge>
+										))}
+									</div>
+									<Button variant="primary" client:load>
+										{course.status === 'available' ? 'Comenzar Curso' :
+										 course.status === 'coming-soon' ? 'Reservar Lugar' : 'Próximamente'}
+									</Button>
+								</div>
+							</div>
+						</div>
+					</Card>
+				))}
+			</div>
+		</section>
+	)}
+
+	<!-- All Courses Grid -->
+	<section>
+		<h2 class="text-2xl font-bold text-academy-text-primary mb-6">Todos los Cursos</h2>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{courses.map(course => (
+				<Card variant="default" className="hover:shadow-lg transition-shadow" key={course.id}>
+					<CardContent className="p-6">
+						<div class="flex items-start justify-between mb-3">
+							<div class="flex-1">
+								<h3 class="text-lg font-semibold text-academy-text-primary mb-2">{course.title}</h3>
+								<p class="text-academy-text-secondary text-sm mb-3 line-clamp-2">{course.description}</p>
+							</div>
+							{course.price === 'free' && <Badge variant="success" size="sm" client:load>Free</Badge>}
+							{course.price === 'premium' && <Badge variant="secondary" size="sm" client:load>Premium</Badge>}
+						</div>
+
+						<div class="flex items-center justify-between text-sm text-academy-text-muted mb-4">
+							<span>📚 {course.lessons} lecciones</span>
+							<span>⏱️ {course.duration}</span>
+						</div>
+
+						<div class="flex items-center justify-between">
+							<div class="flex space-x-1">
+								{course.tags.slice(0, 2).map(tag => (
+									<Badge variant="outline" size="sm" key={tag} client:load>{tag}</Badge>
+								))}
+							</div>
+							<span class={`text-xs px-2 py-1 rounded-full ${
+								course.status === 'available' ? 'bg-green-100 text-green-800' :
+								course.status === 'coming-soon' ? 'bg-yellow-100 text-yellow-800' :
+								'bg-blue-100 text-blue-800'
+							}`}>
+								{course.status === 'available' ? 'Disponible' :
+								 course.status === 'coming-soon' ? 'Próximamente' : 'En Desarrollo'}
+							</span>
+						</div>
+					</CardContent>
+
+					<CardFooter className="p-4 pt-0">
+						<Button variant="outline" size="sm" className="w-full" client:load>
+							{course.status === 'available' ? 'Ver Curso' :
+							 course.status === 'coming-soon' ? 'Más Info' : 'Seguir Desarrollo'}
+						</Button>
+					</CardFooter>
+				</Card>
+			))}
+		</div>
+	</section>
+</CourseLayout>

@@ -1,0 +1,244 @@
+---
+// src/pages/dashboard/index.astro
+import CourseLayout from '../../layouts/CourseLayout.astro';
+import Card, { CardHeader, CardContent } from '../../components/Card.tsx';
+import Badge from '../../components/Badge.tsx';
+import Button from '../../components/Button.tsx';
+import { courses } from '../../lib/data/courses';
+
+// Mock user data (this would come from authentication/database in a real app)
+const user = {
+	name: 'Estudiante Demo',
+	email: 'estudiante@statick.academy',
+	avatar: '/images/avatar-placeholder.jpg',
+	joinDate: '2026-01-15',
+	coursesEnrolled: 2,
+	coursesCompleted: 1,
+	totalProgress: 65,
+};
+
+// Mock enrolled courses (in a real app this would be fetched from database)
+const enrolledCourses = courses.slice(0, 2).map(course => ({
+	...course,
+	progress: course.id === 'open-claw-course' ? 75 : 30,
+	status: course.id === 'open-claw-course' ? 'in-progress' : 'not-started',
+	lastAccessed: '2026-01-20',
+}));
+
+// Mock achievements
+const achievements = [
+	{ id: 'first-course', title: 'Primer Curso', description: 'Completaste tu primer curso', icon: '🎓', unlocked: true },
+	{ id: 'week-streak', title: 'Racha Semanal', description: '7 días seguidos aprendiendo', icon: '🔥', unlocked: true },
+	{ id: 'first-lab', title: 'Experimento', description: 'Completaste tu primer laboratorio', icon: '🧪', unlocked: false },
+	{ id: 'community', title: 'Comunitario', description: 'Participaste en la comunidad', icon: '👥', unlocked: false },
+];
+---
+
+<CourseLayout
+	title="Dashboard - Statick Academy"
+	description="Tu panel de control personal para seguir tu progreso de aprendizaje"
+>
+	<div class="mb-8">
+		<div class="flex items-center justify-between">
+			<div>
+				<h1 class="text-3xl font-bold text-academy-text-primary mb-2">¡Hola, {user.name}!</h1>
+				<p class="text-academy-text-secondary">Bienvenido de vuelta a tu dashboard de aprendizaje</p>
+			</div>
+			<div class="hidden md:block">
+				<Button variant="outline" client:load>
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+					</svg>
+					Configuración
+				</Button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Stats Overview -->
+	<div class="grid md:grid-cols-4 gap-6 mb-8">
+		<Card variant="elevated">
+			<CardContent className="p-6">
+				<div class="flex items-center justify-between">
+					<div>
+						<p class="text-academy-text-secondary text-sm">Cursos Inscritos</p>
+						<p class="text-2xl font-bold text-academy-text-primary">{user.coursesEnrolled}</p>
+					</div>
+					<div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+						<svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+						</svg>
+					</div>
+				</div>
+			</CardContent>
+		</Card>
+
+		<Card variant="elevated">
+			<CardContent className="p-6">
+				<div class="flex items-center justify-between">
+					<div>
+						<p class="text-academy-text-secondary text-sm">Cursos Completados</p>
+						<p class="text-2xl font-bold text-success">{user.coursesCompleted}</p>
+					</div>
+					<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+						<svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						</svg>
+					</div>
+				</div>
+			</CardContent>
+		</Card>
+
+		<Card variant="elevated">
+			<CardContent className="p-6">
+				<div class="flex items-center justify-between">
+					<div>
+						<p class="text-academy-text-secondary text-sm">Progreso Total</p>
+						<p class="text-2xl font-bold text-secondary-600">{user.totalProgress}%</p>
+					</div>
+					<div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+						<svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+						</svg>
+					</div>
+				</div>
+			</CardContent>
+		</Card>
+
+		<Card variant="elevated">
+			<CardContent className="p-6">
+				<div class="flex items-center justify-between">
+					<div>
+						<p class="text-academy-text-secondary text-sm">Logros</p>
+						<p class="text-2xl font-bold text-warning">{achievements.filter(a => a.unlocked).length}</p>
+					</div>
+					<div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+						<svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+						</svg>
+					</div>
+				</div>
+			</CardContent>
+		</Card>
+	</div>
+
+	<!-- Continue Learning -->
+	<section class="mb-8">
+		<h2 class="text-2xl font-bold text-academy-text-primary mb-6">Continuar Aprendiendo</h2>
+
+		<div class="grid md:grid-cols-2 gap-6">
+			{enrolledCourses.map(course => (
+				<Card variant="elevated" key={course.id}>
+					<CardContent className="p-6">
+						<div class="flex items-start justify-between mb-4">
+							<div class="flex-1">
+								<h3 class="text-lg font-semibold text-academy-text-primary mb-2">{course.title}</h3>
+								<p class="text-academy-text-secondary text-sm mb-3">{course.description}</p>
+								<div class="flex items-center space-x-4 text-sm text-academy-text-muted">
+									<span>📊 {course.progress}% completado</span>
+									<span>Último acceso: {course.lastAccessed}</span>
+								</div>
+							</div>
+							<Badge variant={course.status === 'in-progress' ? 'primary' : 'default'} client:load>
+								{course.status === 'in-progress' ? 'En Progreso' : 'No Iniciado'}
+							</Badge>
+						</div>
+
+						<!-- Progress Bar -->
+						<div class="mb-4">
+							<div class="flex items-center justify-between text-sm mb-2">
+								<span class="text-academy-text-secondary">Progreso</span>
+								<span class="text-academy-text-primary font-medium">{course.progress}%</span>
+							</div>
+							<div class="w-full bg-academy-bg-tertiary rounded-full h-2">
+								<div
+									class="bg-primary-600 h-2 rounded-full transition-all duration-300"
+									style={`width: ${course.progress}%`}
+								></div>
+							</div>
+						</div>
+
+						<Button variant="primary" className="w-full" client:load>
+							{course.status === 'in-progress' ? 'Continuar Curso' : 'Comenzar Curso'}
+						</Button>
+					</CardContent>
+				</Card>
+			))}
+		</div>
+	</section>
+
+	<!-- Achievements -->
+	<section class="mb-8">
+		<h2 class="text-2xl font-bold text-academy-text-primary mb-6">Logros Recientes</h2>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+			{achievements.map(achievement => (
+				<Card variant={achievement.unlocked ? "elevated" : "default"} className={achievement.unlocked ? "" : "opacity-50"} key={achievement.id}>
+					<CardContent className="p-6 text-center">
+						<div class={`text-4xl mb-3 ${achievement.unlocked ? '' : 'grayscale'}`}>
+							{achievement.icon}
+						</div>
+						<h3 class="font-semibold text-academy-text-primary mb-2">{achievement.title}</h3>
+						<p class="text-academy-text-secondary text-sm mb-3">{achievement.description}</p>
+						{achievement.unlocked ? (
+							<Badge variant="success" client:load>Desbloqueado</Badge>
+						) : (
+							<Badge variant="default" client:load>Bloqueado</Badge>
+						)}
+					</CardContent>
+				</Card>
+			))}
+		</div>
+	</section>
+
+	<!-- Learning Activity -->
+	<section class="mb-8">
+		<h2 class="text-2xl font-bold text-academy-text-primary mb-6">Actividad Reciente</h2>
+
+		<Card variant="default">
+			<CardContent className="p-6">
+				<div class="space-y-4">
+					<div class="flex items-center space-x-4">
+						<div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+							<svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+						</div>
+						<div class="flex-1">
+							<p class="text-academy-text-primary">Completaste la lección "Introducción a OpenClaw"</p>
+							<p class="text-academy-text-secondary text-sm">Hace 2 horas • OpenClaw Fundamentals</p>
+						</div>
+						<Badge variant="success" client:load>Completado</Badge>
+					</div>
+
+					<div class="flex items-center space-x-4">
+						<div class="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center">
+							<svg class="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+							</svg>
+						</div>
+						<div class="flex-1">
+							<p class="text-academy-text-primary">Te inscribiste al curso "DevOps Fundamentals"</p>
+							<p class="text-academy-text-secondary text-sm">Hace 1 día</p>
+						</div>
+						<Badge variant="info" client:load>Nuevo</Badge>
+					</div>
+
+					<div class="flex items-center space-x-4">
+						<div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
+							<svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+							</svg>
+						</div>
+						<div class="flex-1">
+							<p class="text-academy-text-primary">Desbloqueaste el logro "Primer Curso"</p>
+							<p class="text-academy-text-secondary text-sm">Hace 3 días</p>
+						</div>
+						<Badge variant="warning" client:load>Logro</Badge>
+					</div>
+				</div>
+			</CardContent>
+		</Card>
+	</section>
+</CourseLayout>
