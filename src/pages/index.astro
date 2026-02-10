@@ -1,47 +1,205 @@
 ---
+// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.tsx';
+import Card, { CardHeader, CardContent } from '../components/Card.tsx';
+import Badge from '../components/Badge.tsx';
 ---
 
 <Layout title="Statick Academy - Educación Tecnológica Premium">
-	<div class="text-center">
-		<h1 class="text-4xl font-bold text-slate-900 mb-4">
-			Bienvenido a Statick Academy
-		</h1>
-		<p class="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+	<div class="text-center mb-16">
+		<div class="academy-text-gradient mb-6">
+			<h1 class="text-5xl font-bold mb-4">
+				Bienvenido a Statick Academy
+			</h1>
+		</div>
+		<p class="text-xl text-academy-text-secondary mb-8 max-w-3xl mx-auto leading-relaxed">
 			La plataforma definitiva para aprender tecnología con contenido premium gratuito.
 			Desarrollada por profesionales para la comunidad hispanohablante.
 		</p>
 
-		<div class="grid md:grid-cols-3 gap-6 mt-12">
-			<div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-				<h3 class="text-lg font-semibold text-slate-900 mb-3">🎓 Cursos Estructurados</h3>
-				<p class="text-slate-600">Aprende con cursos completos, desde fundamentos hasta casos avanzados reales.</p>
-			</div>
-			<div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-				<h3 class="text-lg font-semibold text-slate-900 mb-3">💻 Contenido Práctico</h3>
-				<p class="text-slate-600">Laboratorios interactivos y proyectos reales para consolidar el aprendizaje.</p>
-			</div>
-			<div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-				<h3 class="text-lg font-semibold text-slate-900 mb-3">🌍 Comunidad Activa</h3>
-				<p class="text-slate-600">Únete a una comunidad de desarrolladores apasionados por la tecnología.</p>
-			</div>
+		<div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+			<Button variant="primary" size="lg" className="px-8" client:load>
+				Explorar Cursos
+			</Button>
+			<Button variant="outline" size="lg" className="px-8" client:load>
+				Ver Comunidad
+			</Button>
 		</div>
 
-		<div class="mt-12">
-			<h2 class="text-2xl font-bold text-slate-900 mb-6">Próximamente</h2>
-			<div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 rounded-lg">
-				<h3 class="text-xl font-semibold mb-4">🚀 OpenClaw Course</h3>
-				<p class="text-lg mb-4">
-					Dominio completo de OpenClaw: desde fundamentos hasta integración avanzada con asistentes AI.
-				</p>
-				<p class="text-sm opacity-90">
-					11 módulos • 80 lecciones • 20 laboratorios prácticos
-				</p>
-			</div>
-		</div>
-
-		<div class="mt-8 text-slate-500">
-			<p>🛠️ Plataforma en desarrollo - ¡Pronto más contenido!</p>
+		<div class="flex flex-wrap justify-center gap-2 mb-12">
+			<Badge variant="primary" client:load>100% Gratuito</Badge>
+			<Badge variant="secondary" client:load>Contenido Premium</Badge>
+			<Badge variant="success" client:load>Certificaciones</Badge>
+			<Badge variant="info" client:load>Comunidad Activa</Badge>
 		</div>
 	</div>
+
+	<!-- Features Section -->
+	<section class="mb-16">
+		<h2 class="text-3xl font-bold text-center text-academy-text-primary mb-12">
+			¿Por qué Statick Academy?
+		</h2>
+
+		<div class="grid md:grid-cols-3 gap-8">
+			<Card variant="elevated" className="text-center" client:load>
+				<CardContent>
+					<div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+						<svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+						</svg>
+					</div>
+					<h3 class="text-lg font-semibold text-academy-text-primary mb-3">Cursos Estructurados</h3>
+					<p class="text-academy-text-secondary">
+						Aprende con cursos completos, desde fundamentos hasta casos avanzados reales.
+					</p>
+				</CardContent>
+			</Card>
+
+			<Card variant="elevated" className="text-center" client:load>
+				<CardContent>
+					<div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+						<svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+						</svg>
+					</div>
+					<h3 class="text-lg font-semibold text-academy-text-primary mb-3">Contenido Práctico</h3>
+					<p class="text-academy-text-secondary">
+						Laboratorios interactivos y proyectos reales para consolidar el aprendizaje.
+					</p>
+				</CardContent>
+			</Card>
+
+			<Card variant="elevated" className="text-center" client:load>
+				<CardContent>
+					<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+						<svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+						</svg>
+					</div>
+					<h3 class="text-lg font-semibold text-academy-text-primary mb-3">Comunidad Activa</h3>
+					<p class="text-academy-text-secondary">
+						Únete a una comunidad de desarrolladores apasionados por la tecnología.
+					</p>
+				</CardContent>
+			</Card>
+		</div>
+	</section>
+
+	<!-- Featured Course Section -->
+	<section class="mb-16">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl font-bold text-academy-text-primary mb-4">
+				Curso Destacado
+			</h2>
+			<p class="text-academy-text-secondary max-w-2xl mx-auto">
+				Comienza tu viaje en el mundo de la tecnología con nuestro curso más popular
+			</p>
+		</div>
+
+		<div class="max-w-4xl mx-auto">
+			<Card variant="elevated" className="overflow-hidden" client:load>
+				<div class="bg-gradient-to-r from-primary-600 to-secondary-600 p-8 text-white">
+					<div class="flex items-center justify-between mb-4">
+						<Badge variant="secondary" className="bg-white/20 text-white border-white/30" client:load>
+							Próximamente
+						</Badge>
+						<span className="text-sm opacity-90">Lanzamiento Q1 2026</span>
+					</div>
+					<h3 class="text-2xl font-bold mb-2">🚀 OpenClaw Course</h3>
+					<p class="text-lg opacity-90 mb-4">
+						Dominio completo del ecosistema OpenClaw y asistentes AI
+					</p>
+					<div class="flex flex-wrap gap-4 text-sm">
+						<div class="flex items-center">
+							<svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+							</svg>
+							11 Módulos
+						</div>
+						<div class="flex items-center">
+							<svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+							</svg>
+							80 Lecciones
+						</div>
+						<div class="flex items-center">
+							<svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+							</svg>
+							20 Laboratorios
+						</div>
+					</div>
+				</div>
+				<CardContent className="p-8">
+					<div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+						<div>
+							<h4 className="font-semibold text-academy-text-primary mb-2">¿Qué aprenderás?</h4>
+							<ul className="text-academy-text-secondary space-y-1 text-sm">
+								<li>• Arquitectura y componentes de OpenClaw</li>
+								<li>• Integración con asistentes AI (Claude, Cursor, etc.)</li>
+								<li>• Desarrollo de herramientas personalizadas</li>
+								<li>• Casos de uso avanzados en desarrollo</li>
+							</ul>
+						</div>
+						<Button variant="primary" size="lg" client:load>
+							Reservar Lugar
+						</Button>
+					</div>
+				</CardContent>
+			</Card>
+		</div>
+	</section>
+
+	<!-- Stats Section -->
+	<section class="bg-academy-bg-primary rounded-2xl p-8 md:p-12 mb-16">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl font-bold text-academy-text-primary mb-4">
+				Números que Hablan
+			</h2>
+			<p class="text-academy-text-secondary">
+				El impacto de Statick Academy en la comunidad tecnológica
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-4 gap-8">
+			<div class="text-center">
+				<div class="text-3xl font-bold text-primary-600 mb-2">100%</div>
+				<div class="text-academy-text-secondary">Gratuito</div>
+			</div>
+			<div class="text-center">
+				<div class="text-3xl font-bold text-secondary-600 mb-2">0</div>
+				<div class="text-academy-text-secondary">Estudiantes</div>
+			</div>
+			<div class="text-center">
+				<div class="text-3xl font-bold text-success mb-2">1</div>
+				<div class="text-academy-text-secondary">Curso Listo</div>
+			</div>
+			<div class="text-center">
+				<div class="text-3xl font-bold text-info mb-2">∞</div>
+				<div class="text-academy-text-secondary">Potencial</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="text-center">
+		<div class="academy-gradient rounded-2xl p-8 md:p-12 text-white">
+			<h2 class="text-3xl font-bold mb-4">
+				¿Listo para Transformar tu Carrera?
+			</h2>
+			<p class="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+				Únete a miles de desarrolladores que ya están aprendiendo con Statick Academy.
+				Tu futuro en tecnología comienza aquí.
+			</p>
+			<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				<Button variant="secondary" size="lg" className="px-8 bg-white text-primary-600 hover:bg-gray-50" client:load>
+					Comenzar Ahora
+				</Button>
+				<Button variant="outline" size="lg" className="px-8 border-white text-white hover:bg-white hover:text-primary-600" client:load>
+					Ver Roadmap
+				</Button>
+			</div>
+		</div>
+	</section>
 </Layout>
